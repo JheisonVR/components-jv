@@ -1,18 +1,45 @@
-//import Image from "next/image";
+'use client'
+
+import Link from "next/link";
+import Image from "next/image";
 
 export const Navbar = () => {
+
+  const handleNotifications = () => {
+    const hideMenu = document.querySelector("#notifications")
+    if(hideMenu){
+      if(hideMenu.hasAttribute("hidden")){
+        hideMenu.removeAttribute("hidden")
+      } else{
+        hideMenu.setAttribute("hidden", "")
+      }
+    }
+  }
+
+  function handleShowMobileMenu (){
+    const mobileMenu = document.querySelector('#mobile-menu')
+    if(mobileMenu){
+      if(mobileMenu.hasAttribute('hidden')){
+        mobileMenu.removeAttribute('hidden')
+      } else {
+        mobileMenu.setAttribute('hidden','')
+      }
+    }
+  }
+
   return (
-    <nav className="bg-slate-50 w-screen border-b-4 border-solid border-red-700">
+    <nav className="bg-slate-50 w-full border-b-4 border-solid rounded-md border-red-700 z-10">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className=" left-0 flex items-center sm:hidden">
             <button
               type="button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-red-950 focus:ring-2 focus:ring-red-950 focus:outline-hidden focus:ring-inset"
+              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-red-950 focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
               aria-controls="mobile-menu"
               aria-expanded="false"
+              onClick={handleShowMobileMenu}
             >
-              <span className="absolute -inset-0.5"></span>
+              <span className="absolute "></span>
               <span className="sr-only">Open Main menu</span>
               {/* Icon when menu is closed.
                         Menu open: "hidden", Menu closed: "block" */}
@@ -56,10 +83,16 @@ export const Navbar = () => {
               {/* <Image height={100} width={100} src="#" alt="logo" /> */}
             </div>
             <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                <a className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">
-                  Products
-                </a>
+              <div className="flex space-x-0.5">
+                <Link href='#' className="px-3 py-2 text-sm font-medium text-neutral-950 uppercase hover:scale-105 duration-500 border-x border-rose-900">
+                  About Us
+                </Link>
+                <Link href='#' className="px-3 py-2 text-sm font-medium text-neutral-950 uppercase hover:scale-105 duration-500 ">
+                  Productos
+                </Link>
+                <Link href='#' className="px-3 py-2 text-sm font-medium text-neutral-950 uppercase  hover:scale-105 duration-500 border-x border-rose-900">
+                  Cotización
+                </Link>
               </div>
             </div>
           </div>
@@ -69,6 +102,7 @@ export const Navbar = () => {
             <button
               type="button"
               className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+              onClick={handleNotifications}
             >
               <span className="absolute -inset-1.5"></span>
               <span className="sr-only">View notifications</span>
@@ -101,11 +135,13 @@ export const Navbar = () => {
                 >
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
-                  {/* <Image
+                  <Image
                     className="size-8 rounded-full"
-                    src="#"
+                    src="https://images.pexels.com/photos/2061057/pexels-photo-2061057.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                     alt="Profile photo"
-                  /> */}
+                    width={500}
+                    height={500}
+                  />
                 </button>
               </div>
 
@@ -121,16 +157,19 @@ export const Navbar = () => {
                 To: "transform opacity-0 scale-95"
             --> */}
               <div
+                id="notifications"
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
+                hidden
+                
                 //tabindex="-1"
               >
                 {/* <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" --> */}
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:border-b hover:scale-95 duration-150"
                   role="menuitem"
                   //tabindex="-1"
                   id="user-menu-item-0"
@@ -139,7 +178,7 @@ export const Navbar = () => {
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:border-b hover:scale-95 duration-150"
                   role="menuitem"
                   //tabindex="-1"
                   id="user-menu-item-1"
@@ -148,7 +187,7 @@ export const Navbar = () => {
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:border-b hover:scale-95 duration-150"
                   role="menuitem"
                   //tabindex="-1"
                   id="user-menu-item-2"
@@ -162,34 +201,34 @@ export const Navbar = () => {
       </div>
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
-      <div className="sm:hidden" id="mobile-menu">
-        <div className="space-y-1 px-2 pt-2 pb-3">
+      <div className="sm:hidden" id="mobile-menu" hidden>
+        <div className=" gap-1 px-2 pt-2 pb-3 flex flex-col justify-center">
           {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-          <a
+          <Link
             href="#"
-            className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            className="rounded-md hover:bg-gray-700 px-3 py-2 text-base font-medium text-gray-600 text-center border-1 hover:text-white"
             aria-current="page"
           >
-            Dashboard
-          </a>
-          <a
+            About Us
+          </Link>
+          <Link
             href="#"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-700 hover:text-white text-center border-1 "
           >
             Team
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-700 hover:text-white text-center border-1"
           >
-            Projects
-          </a>
-          <a
+            Productos
+          </Link>
+          <Link
             href="#"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-700 hover:text-white text-center border-1"
           >
-            Calendar
-          </a>
+            Cotización
+          </Link>
         </div>
       </div>
     </nav>
